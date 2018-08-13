@@ -1,0 +1,206 @@
+<patch-1.0 appVersion="1.0.12">
+   <comment type="patch/comment" x="28" y="28" text="MY FIRST TREMOLO PEDAL"/>
+   <comment type="patch/comment" x="728" y="28" text="This file was created by Alessandro Contini in August 2018."/>
+   <comment type="patch/comment" x="28" y="42" text="This is a patch that emulates the classic pulsating effect of a tremolo/vibrato unit."/>
+   <comment type="patch/comment" x="728" y="42" text="And it&apos;s released under a Beerware license. Have fun!"/>
+   <comment type="patch/comment" x="28" y="70" text="To create this effect it combines the dry input signal with a wet signal processed by an LFO."/>
+   <comment type="patch/comment" x="28" y="84" text="It&apos;s possible to choose different waveshapes for the LFO and to control various parameters:"/>
+   <comment type="patch/comment" x="28" y="98" text="- SPEED of the pulsating effect can be controlled with a potentiometer connected to pin PC1"/>
+   <comment type="patch/comment" x="28" y="112" text="- SHAPE of the pulsating effect (sine, inverted sawtooth, sawtooth and square wave) can be controlled with a potentiometer connected to pin PC3"/>
+   <comment type="patch/comment" x="28" y="126" text="- DEPTH of the pulsating effect (mix between the wet and dry signal) can be controlloed with a potentiometer connected to pin PC2"/>
+   <comment type="patch/comment" x="28" y="140" text="- LEVEL of the output signal can be controlloed with a potentiometer connected to pin PC0"/>
+   <comment type="patch/comment" x="28" y="168" text="An LED connected to pin PA0 would help visualizing the SPEED and SHAPE of the pulsating effect."/>
+   <comment type="patch/comment" x="28" y="224" text="&gt; Audio IN"/>
+   <comment type="patch/comment" x="168" y="224" text="SPEED"/>
+   <comment type="patch/comment" x="868" y="224" text="DEPTH"/>
+   <comment type="patch/comment" x="1036" y="224" text="LEVEL"/>
+   <comment type="patch/comment" x="1162" y="224" text="Audio OUT &gt;"/>
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="adc_11" x="28" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="168" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="868" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_2" x="1036" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1162" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="168" y="322" text="Speed pot = PC1"/>
+   <comment type="patch/comment" x="434" y="322" text="SHAPE"/>
+   <comment type="patch/comment" x="546" y="322" text="Shape pot = PC3"/>
+   <comment type="patch/comment" x="812" y="322" text="Depth pot = PC2"/>
+   <comment type="patch/comment" x="966" y="322" text="Level pot = PC0"/>
+   <obj type="gpio/in/analog" uuid="1c0c845ed2d7e06ae5f377ba13d9d09f4747ac87" name="analogRead_1" x="168" y="336">
+      <params/>
+      <attribs>
+         <combo attributeName="channel" selection="PC1 (ADC1_IN11)"/>
+      </attribs>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_1" x="434" y="336">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/analog" uuid="1c0c845ed2d7e06ae5f377ba13d9d09f4747ac87" name="analogRead_4" x="546" y="336">
+      <params/>
+      <attribs>
+         <combo attributeName="channel" selection="PC3 (ADC1_IN13)"/>
+      </attribs>
+   </obj>
+   <obj type="math/div 16" uuid="19cf8d3358046cb69c1139e51a3e1555742492e0" name="div_1" x="672" y="336">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/analog" uuid="1c0c845ed2d7e06ae5f377ba13d9d09f4747ac87" name="analogRead_2" x="812" y="336">
+      <params/>
+      <attribs>
+         <combo attributeName="channel" selection="PC2 (ADC1_IN12)"/>
+      </attribs>
+   </obj>
+   <obj type="gpio/in/analog" uuid="1c0c845ed2d7e06ae5f377ba13d9d09f4747ac87" name="analogRead_3" x="966" y="336">
+      <params/>
+      <attribs>
+         <combo attributeName="channel" selection="PC0 (ADC1_IN10)"/>
+      </attribs>
+   </obj>
+   <obj type="disp/dial p" uuid="44fd18b562e434b3230441681132dbeabb15cdc5" name="dial_3" x="168" y="392">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/dial p" uuid="44fd18b562e434b3230441681132dbeabb15cdc5" name="dial_6" x="546" y="392">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/dial p" uuid="44fd18b562e434b3230441681132dbeabb15cdc5" name="dial_4" x="868" y="392">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/dial p" uuid="44fd18b562e434b3230441681132dbeabb15cdc5" name="dial_5" x="1022" y="392">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/saw down" uuid="d831d6b82b3d559c3ba7b1b487fb292d7998fd08" name="saw_2" x="434" y="420">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="conv/unipolar2bipolar" uuid="efc8ee28c508740c5edf7995eaaa07a6d6818e5e" name="unipolar2bipolar_1" x="168" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/saw" uuid="ef2a162678b533c5e46c4e3c0decba17b1862d85" name="saw_1" x="434" y="518">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="630" y="602" text="Feedback LED = PA0"/>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_1" x="434" y="616">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mux/mux 4" uuid="96e98d60314b64d05eb68046afa3ddfa42a785c6" name="mux_1" x="546" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/pwm t5" uuid="73c0c557-0e70-401a-8c07-460c0010710b" name="pwm_1" x="630" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="adc_11" outlet="wave"/>
+         <dest obj="vca_1" inlet="a"/>
+         <dest obj="xfade_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="mux_1" inlet="i0"/>
+      </net>
+      <net>
+         <source obj="saw_2" outlet="wave"/>
+         <dest obj="mux_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="saw_1" outlet="wave"/>
+         <dest obj="mux_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="mux_1" outlet="o"/>
+         <dest obj="vca_1" inlet="v"/>
+         <dest obj="pwm_1" inlet="pa0"/>
+      </net>
+      <net>
+         <source obj="vca_1" outlet="o"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="analogRead_1" outlet="out"/>
+         <dest obj="dial_3" inlet="in"/>
+         <dest obj="unipolar2bipolar_1" inlet="i"/>
+      </net>
+      <net>
+         <source obj="unipolar2bipolar_1" outlet="o"/>
+         <dest obj="sine_1" inlet="pitch"/>
+         <dest obj="saw_2" inlet="pitch"/>
+         <dest obj="saw_1" inlet="pitch"/>
+         <dest obj="square_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="analogRead_2" outlet="out"/>
+         <dest obj="dial_4" inlet="in"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="analogRead_3" outlet="out"/>
+         <dest obj="dial_5" inlet="in"/>
+         <dest obj="vca_2" inlet="v"/>
+      </net>
+      <net>
+         <source obj="analogRead_4" outlet="out"/>
+         <dest obj="dial_6" inlet="in"/>
+         <dest obj="div_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="div_1" outlet="out"/>
+         <dest obj="mux_1" inlet="s"/>
+      </net>
+      <net>
+         <source obj="square_1" outlet="wave"/>
+         <dest obj="mux_1" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="vca_2" inlet="a"/>
+      </net>
+      <net>
+         <source obj="vca_2" outlet="o"/>
+         <dest obj="out_1" inlet="left"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>0</x>
+      <y>23</y>
+      <width>1440</width>
+      <height>873</height>
+   </windowPos>
+</patch-1.0>
